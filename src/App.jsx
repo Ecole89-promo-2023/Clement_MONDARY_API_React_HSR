@@ -1,10 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [characters, setCharacters] = useState([])
+
+  useEffect(() => {
+    async function fetchCharacters() {
+      const response = await fetch('http://localhost:3001/api/characters');
+      const chars = await response.json();
+      setCharacters(chars);
+    }
+    fetchCharacters();
+  }, []);
 
   return (
     <>
