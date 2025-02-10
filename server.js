@@ -16,7 +16,17 @@ app.get('/api/characters', async (req, res) => {
     try {
         const charactersData = await client.getAllCharacters();
         const mappedCharacters = charactersData.map(c => ({
+            id: c.id,
+            name: c.name.get(),
             imageUrl: `${c.splashImage.url}`,
+            path: {
+                name: c.path.name.get(),
+                icon: c.path.icon.url
+            },
+            element: {
+                name: c.combatType.name.get(),
+                icon: c.combatType.icon.url,
+            },
         }));
         console.log('Characters data:', mappedCharacters);
         res.json(mappedCharacters);
