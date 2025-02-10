@@ -10,8 +10,9 @@ function App() {
   useEffect(() => {
     async function fetchCharacters() {
       const response = await fetch('http://localhost:3001/api/characters');
-      const chars = await response.json();
-      setCharacters(chars);
+      const data = await response.json();
+      setCharacters(data);
+      console.log('Characters:', data);
     }
     fetchCharacters();
   }, []);
@@ -38,6 +39,17 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <div>
+        {characters.map((c, index) => (
+          <div key={index}>
+            <img
+              src={`${c.imageUrl}`}
+              alt="Character Splash Art"
+              style={{ maxWidth: '600px' }}
+            />
+          </div>
+        ))}
+      </div>
     </>
   )
 }
