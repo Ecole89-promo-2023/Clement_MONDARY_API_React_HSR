@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import CharacterDetails from './pages/CharacterDetails';
 import './App.css'
@@ -18,7 +18,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home characters={characters} />} />
+      <Route path="/" element={<Navigate to="/characters" replace />} />
+      <Route path="/characters" element={<Home characters={characters} />} />
       <Route path="/character/:id" element={<CharacterDetails />} />
     </Routes>
   )
